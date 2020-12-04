@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movis_nav_graph"
+    app:startDestination="@id/moviFragment">
+
+    <fragment
+        android:id="@+id/moviFragment"
+        android:name="com.base.newmovie.MoviFragment"
+        android:label="fragment_movi"
+        tools:layout="@layout/fragment_movi" >
+        <action
+            android:id="@+id/action_moviFragment_to_detailMovies"
+            app:destination="@id/detailMovies"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_out_right"
+            app:popExitAnim="@anim/slide_in_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/detailMovies"
+        android:name="com.base.newmovie.detailMovies"
+        android:label="fragment_detail_movies"
+        tools:layout="@layout/fragment_detail_movies" />
+
+</navigation>
