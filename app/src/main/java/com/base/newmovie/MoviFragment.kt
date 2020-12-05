@@ -20,7 +20,7 @@ class MoviFragment : Fragment (R.layout.fragment_movi) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MoviesListViewModel::class.java)
+        viewModel = (activity as MainActivity).viewModel
         initAdapter()
         initState()
     }
