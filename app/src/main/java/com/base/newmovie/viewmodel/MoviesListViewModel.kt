@@ -6,37 +6,39 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.base.newmovie.api.Network
-import com.base.newmovie.data.Movie
+import com.base.newmovie.data.MovieDataSource
+import com.base.newmovie.data.Search
 import com.base.newmovie.data.State
+import com.base.newmovie.data.MoviesDataSourceFactory
 
 import io.reactivex.disposables.CompositeDisposable
 
 class MoviesListViewModel : ViewModel() {
 
-   /* private val networkService = Network.getService()
-    var moviesList: LiveData<PagedList<Movie>>
+   private val networkService = Network.getService()
+    var moviesList: LiveData<PagedList<Search>>
     private val compositeDisposable = CompositeDisposable()
     private val pageSize = 5
-    private val newsDataSourceFactory: NewsDataSourceFactory
+    private val moviesDataSourceFactory: MoviesDataSourceFactory
 
     init {
-        newsDataSourceFactory = NewsDataSourceFactory(compositeDisposable, networkService)
+        moviesDataSourceFactory = MoviesDataSourceFactory(compositeDisposable, networkService)
         val config = PagedList.Config.Builder()
                 .setPageSize(pageSize)
                 .setInitialLoadSizeHint(pageSize * 2)
                 .setEnablePlaceholders(false)
                 .build()
-        moviesList = LivePagedListBuilder(newsDataSourceFactory, config).build()
+        moviesList = LivePagedListBuilder(moviesDataSourceFactory, config).build()
     }
 
 
     fun getState(): LiveData<State> = Transformations.switchMap(
-            newsDataSourceFactory.newsDataSourceLiveData,
-            NewsDataSource::state
+        moviesDataSourceFactory.newsDataSourceLiveData,
+            MovieDataSource::state
     )
 
     fun retry() {
-        newsDataSourceFactory.newsDataSourceLiveData.value?.retry()
+        moviesDataSourceFactory.newsDataSourceLiveData.value?.retry()
     }
 
     fun listIsEmpty(): Boolean {
@@ -46,5 +48,5 @@ class MoviesListViewModel : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()
-    }*/
+    }
 }

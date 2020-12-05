@@ -4,12 +4,12 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.base.newmovie.data.Movie
+import com.base.newmovie.data.Search
 import com.base.newmovie.data.State
 
 
-class NewsListAdapter(private val retry: () -> Unit)
-    : PagedListAdapter<Movie, RecyclerView.ViewHolder>(NewsDiffCallback) {
+class MoviesListAdapter(private val retry: () -> Unit)
+    : PagedListAdapter<Search, RecyclerView.ViewHolder>(NewsDiffCallback) {
 
     private val DATA_VIEW_TYPE = 1
     private val FOOTER_VIEW_TYPE = 2
@@ -31,12 +31,12 @@ class NewsListAdapter(private val retry: () -> Unit)
     }
 
     companion object {
-        val NewsDiffCallback = object : DiffUtil.ItemCallback<Movie>() {
-            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+        val NewsDiffCallback = object : DiffUtil.ItemCallback<Search>() {
+            override fun areItemsTheSame(oldItem: Search, newItem: Search): Boolean {
                 return oldItem.title == newItem.title
             }
 
-            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+            override fun areContentsTheSame(oldItem: Search, newItem: Search): Boolean {
                 return oldItem == newItem
             }
         }
