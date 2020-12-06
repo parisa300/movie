@@ -1,5 +1,7 @@
 package com.base.newmovie.data
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.base.newmovie.adapter.MoviesViewHolder
@@ -16,67 +18,38 @@ import retrofit2.Response
 class DetailDataSource(
         private val networkService: Network,
         private val compositeDisposable: CompositeDisposable)
-    : PageKeyedDataSource<Int, Movie>() {
+  {
 
     var state: MutableLiveData<State> = MutableLiveData()
     private var retryCompletable: Completable? = null
 
+private  val moviedetairesponce =MutableLiveData<Movie>()
+      val donloadmovie :LiveData<Movie>
+      get() = moviedetairesponce
 
-    override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Movie>) {
-        updateState(State.LOADING)
-        compositeDisposable.add(
-                networkService.getDetailmovie(MoviesViewHolder.id_movie)
+      fun fetchmoviedetail(movieId :String){
 
-                        .subscribe(
-                                { response ->
-                                    updateState(State.DONE)
-                                    response.imdbID
-                                    response.Actors
-                                    response.Genre
-                                    response.Poster
-                                    response.Rated
-                                    response.Released
-                                    response.Runtime
-                                    response.Writer
-                                    response.Year
-                                    response.title
+          State.LOADING
+          try {
+              compositeDisposable.add(
+                  networkService.getDetailmovie(movieId)
+                      .subscribeOn(Schedulers.io())
+                      .subscribe(
+                          {
+                              moviedetairesponce.postValue(it)
+                              State.LOADING
+                          },{
 
+                             State.ERROR
+                              Log.e("DeatailDatasoure", it.message.toString())
+                          }
 
-                                },
-                                {
-                                    updateState(State.ERROR)
-                                    setRetry(Action { loadInitial(params, callback) })
-                                }
-                        )
-        )
-    }
-
-
-
-    private fun updateState(state: State) {
-        this.state.postValue(state)
-    }
-
-    fun retry() {
-        if (retryCompletable != null) {
-            compositeDisposable.add(retryCompletable!!
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe())
-        }
-    }
-
-    private fun setRetry(action: Action?) {
-        retryCompletable = if (action == null) null else Completable.fromAction(action)
-    }
-
-    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Movie>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Movie>) {
-        TODO("Not yet implemented")
-    }
+                      )
+              )
+          }catch (e :Exception){
+              Log.e("DeatailDatasoure", e.message.toString())
+          }
+      }
 
 
 }

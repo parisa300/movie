@@ -6,17 +6,19 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import com.base.newmovie.api.Network
 import com.base.newmovie.data.*
+import com.base.newmovie.repository.moviesRepository
 import io.reactivex.disposables.CompositeDisposable
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel(private val moviesRepository: moviesRepository,movieId :String) : ViewModel() {
     private val networkService = Network.getService()
-    lateinit var Detailmovie: LiveData<Movie>
+
     private val compositeDisposable = CompositeDisposable()
+   val Detailmovie: LiveData<Movie> by lazy {
 
-    init {
+       moviesRepository.fetchmoviedetail(compositeDisposable,movieId)
 
 
-    }
+   }
 
 
 

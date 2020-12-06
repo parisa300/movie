@@ -11,7 +11,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Action
 import io.reactivex.schedulers.Schedulers
 
-class MovieDataSource(
+class  MovieDataSource(
         private val networkService: Network,
         private val compositeDisposable: CompositeDisposable)
     : PageKeyedDataSource<Int, Search>() {
