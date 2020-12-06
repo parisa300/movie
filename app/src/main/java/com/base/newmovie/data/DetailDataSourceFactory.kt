@@ -18,7 +18,7 @@ class DetailDataSourceFactory(
         val detailsDataSource = MovieDataSource(networkService, compositeDisposable)
       //  detailDataSourceLiveData.postValue(detailsDataSource)
         TODO("Not yet implemented")
-        return DetailViewModel() as T
+
     }
 
 }
