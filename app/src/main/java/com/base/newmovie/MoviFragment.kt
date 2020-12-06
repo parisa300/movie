@@ -2,11 +2,11 @@ package com.base.newmovie
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+
 import android.view.View
-import android.view.ViewGroup
+
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+
 import com.base.newmovie.adapter.MoviesListAdapter
 import com.base.newmovie.data.State
 import com.base.newmovie.viewmodel.MoviesListViewModel

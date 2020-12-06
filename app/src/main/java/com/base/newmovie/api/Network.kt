@@ -1,5 +1,6 @@
 package com.base.newmovie.api
 
+import com.base.newmovie.data.Movie
 import com.base.newmovie.data.Response
 import com.base.newmovie.utils.Constants
 import com.base.newmovie.utils.Constants.Companion.API_KEY
@@ -15,21 +16,25 @@ interface Network {
 
     @GET("?apiKey=2d8ad95a&s=batman")
     fun getMovies(
-        @Query("page") page: Int,
-        @Query("pageSize") pageSize: Int
+            @Query("page") page: Int,
+            @Query("pageSize") pageSize: Int
 
     ): Single<Response>
 
+    @GET("?apikey=2d8ad95a")
+    fun getDetailmovie(
+            @Query("i") searchId: String
 
-    companion object{
+    ):Single<Movie>
+
+    companion object {
 
         fun getService(): Network {
             val retrofit = Retrofit.Builder()
-                .client(OkHttpClient())
-                .baseUrl(Constants.BASE_URL)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+                    .baseUrl(Constants.BASE_URL)
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
             return retrofit.create(Network::class.java)
         }
     }
