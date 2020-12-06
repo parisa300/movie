@@ -2,6 +2,7 @@ package com.base.newmovie.adapter
 
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.base.newmovie.data.Search
@@ -17,13 +18,18 @@ class MoviesListAdapter(private val retry: () -> Unit)
     private var state = State.LOADING
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
         return if (viewType == DATA_VIEW_TYPE) MoviesViewHolder.create(parent) else ListFooterViewHolder.create(retry, parent)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
         if (getItemViewType(position) == DATA_VIEW_TYPE)
             (holder as MoviesViewHolder).bind(getItem(position))
         else (holder as ListFooterViewHolder).bind(state)
+
+
+
     }
 
     override fun getItemViewType(position: Int): Int {

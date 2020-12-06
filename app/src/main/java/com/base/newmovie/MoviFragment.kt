@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 
 import com.base.newmovie.adapter.MoviesListAdapter
 import com.base.newmovie.data.State
@@ -21,8 +22,11 @@ class MoviFragment : Fragment (R.layout.fragment_movi) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as MainActivity).viewModel
+
         initAdapter()
         initState()
+
+
     }
 
     private fun initAdapter() {
@@ -47,4 +51,5 @@ class MoviFragment : Fragment (R.layout.fragment_movi) {
         })
 
     }
+
 }

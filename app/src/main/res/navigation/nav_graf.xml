@@ -22,7 +22,12 @@
         android:id="@+id/detailMovies"
         android:name="com.base.newmovie.detailMovies"
         android:label="fragment_detail_movies"
-        tools:layout="@layout/fragment_detail_movies" />
+        tools:layout="@layout/fragment_detail_movies" >
+
+        <argument
+            android:name="detail"
+            app:argType="com.base.newmovie.data.Movie" />
+    </fragment>
 
 
 
