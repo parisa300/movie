@@ -39,14 +39,16 @@ class detailMovies : Fragment(R.layout.fragment_detail_movies) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-     //  detailViewModel = (activity as MainActivity)
+
+
 
         val moviId =  MoviesViewHolder.id_movie
+        detailViewModel.viewdetail(moviId)
         val apiservice =Network.getService()
         moviesRepository= moviesRepository(apiservice)
      //   detailViewModel =getviewmodel(moviId)
 
-     init()
+   //  init()
 
     }
 fun init(){

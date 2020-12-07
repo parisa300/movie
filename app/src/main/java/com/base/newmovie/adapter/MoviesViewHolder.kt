@@ -1,5 +1,6 @@
 package com.base.newmovie.adapter
 
+import android.content.Intent
 import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,7 @@ class MoviesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
          val bundle = bundleOf("movie" to id_movie)
          itemView.findNavController().navigate(R.id.detailMovies, bundle)
+
 }
 
 
