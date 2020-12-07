@@ -11,11 +11,11 @@ class MoviesDataSourceFactory(
         private val networkService: Network)
     : DataSource.Factory<Int, Search>() {
 
-    val newsDataSourceLiveData = MutableLiveData<MovieDataSource>()
+    val moviesDataSourceLiveData = MutableLiveData<MovieDataSource>()
 
     override fun create(): DataSource<Int, Search> {
         val newsDataSource = MovieDataSource(networkService, compositeDisposable)
-        newsDataSourceLiveData.postValue(newsDataSource)
+        moviesDataSourceLiveData.postValue(newsDataSource)
         return newsDataSource
     }
 }

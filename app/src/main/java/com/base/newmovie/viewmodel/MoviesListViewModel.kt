@@ -33,12 +33,12 @@ class MoviesListViewModel : ViewModel() {
 
 
     fun getState(): LiveData<State> = Transformations.switchMap(
-        moviesDataSourceFactory.newsDataSourceLiveData,
+        moviesDataSourceFactory.moviesDataSourceLiveData,
             MovieDataSource::state
     )
 
     fun retry() {
-        moviesDataSourceFactory.newsDataSourceLiveData.value?.retry()
+        moviesDataSourceFactory.moviesDataSourceLiveData.value?.retry()
     }
 
     fun listIsEmpty(): Boolean {

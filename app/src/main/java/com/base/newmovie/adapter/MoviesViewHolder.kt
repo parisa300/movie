@@ -4,6 +4,9 @@ import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.base.newmovie.R
 import com.base.newmovie.data.Search
@@ -26,6 +29,12 @@ class MoviesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 .into(itemView.iv_image)
      itemView.setOnClickListener {
      id_movie =movie.imdbID.toString()
+       //  Navigation.createNavigateOnClickListener(R.id.detailMovies)
+     //    itemView.findNavController().navigate(adapterPosition)
+
+
+         val bundle = bundleOf("movie" to id_movie)
+         itemView.findNavController().navigate(R.id.detailMovies, bundle)
 }
 
 

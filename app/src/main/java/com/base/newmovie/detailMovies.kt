@@ -10,7 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 
 import androidx.lifecycle.get
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.navGraphViewModels
 import com.base.newmovie.adapter.MoviesListAdapter
+import com.base.newmovie.adapter.MoviesViewHolder
 import com.base.newmovie.api.Network
 import com.base.newmovie.data.Movie
 import com.base.newmovie.repository.moviesRepository
@@ -22,25 +24,37 @@ import kotlinx.android.synthetic.main.fragment_detail_movies.*
 
 
 
-@Suppress("UNREACHABLE_CODE")
-class detailMovies : Fragment(R.layout.fragment_detail_movies) {
-    private lateinit var detailViewModel: DetailViewModel
- private lateinit var moviesRepository: moviesRepository
-  //  val args : detailMovies by navArgs()
 
+class detailMovies : Fragment(R.layout.fragment_detail_movies) {
+
+     lateinit var detailViewModel: DetailViewModel
+     lateinit var moviesRepository: moviesRepository
+
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
+
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-      //  detailViewModel = (activity as MainActivity)
-        val moviId =1
+     //  detailViewModel = (activity as MainActivity)
+
+        val moviId =  MoviesViewHolder.id_movie
         val apiservice =Network.getService()
         moviesRepository= moviesRepository(apiservice)
-        detailViewModel =getviewmodel(moviId)
-        detailViewModel.Detailmovie.observe(this.viewLifecycleOwner, Observer {
-            binduI(it as Movie)
-        })
-    }
+     //   detailViewModel =getviewmodel(moviId)
 
+     init()
+
+    }
+fun init(){
+
+    detailViewModel.Detailmovie.observe(this.viewLifecycleOwner, Observer {
+        binduI(it as Movie)
+    })
+}
 
     fun  binduI(it : Movie){
         txtactor.text=it.Actors
@@ -53,11 +67,12 @@ class detailMovies : Fragment(R.layout.fragment_detail_movies) {
             .centerCrop() //4
             .into(this.iv_detail)
     }
- private fun getviewmodel(moviId :Int):DetailViewModel{
-     return ViewModelProvider(this).get(DetailViewModel ::class.java)
-
+ /*fun getviewmodel(moviId :String):DetailViewModel{
+   //  return ViewModelProvider(this).get(DetailViewModel ::class.java)
+     return ViewModelProvider.AndroidViewModelFactory(activity)
+             .create(DetailViewModel::class.java)*/
 
  }
 
 
-    }
+
